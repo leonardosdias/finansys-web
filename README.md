@@ -1,27 +1,73 @@
 # Finansys
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
+SPA Gerenciador Financeiro desenvolvido com Angular
 
-## Development server
+## 🚀 Começando
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-## Code scaffolding
+### 📋 Pré-requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ferramentas necessárias para executar o projeto
 
-## Build
+- Node.js
+- Angular CLI
+- Git
+- Yarn
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 🔧 Instalação
 
-## Running unit tests
+Para exexutar o projeto localmente, é necessário:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Clonar o projeto localmente:
 
-## Running end-to-end tests
+```
+git clone https://github.com/leonardosdias/finansys-web.git
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Acessar o diretório do projeto clonado e instalar as dependências necessárias:
 
-## Further help
+```
+yarn install ou npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Executar o projeto localmente:
+
+```
+yarn start ou npm run start
+```
+
+##### Observação:
+
+Ambas sugestões acima irão executar o projeto na porta 4200 do seu localhost (http://localhost:4200), e para isso, é necessário acessar a url do projeto local manualmente, mas caso queira forçar o navegador a abrir o projeto, basta executar o comando **ng serve --open**.
+
+## ⚙️ Executando os testes
+
+A ser implementado posteriormente.
+
+## 📦 Desenvolvimento
+
+Projeto desenvolvido afim de estudos, visando aplicar conceitos da arquitetura **master/detail** para estruturação e reutilização de componentes visuais.
+
+## 🛠️ Construído com
+
+Principais tecnologias utilizadas para desenvolvimento do projeto
+
+- [Angular](https://angular.io/) - O framework web usado
+- [Bootstrap](https://getbootstrap.com/) - Design System
+- [Chart.js](https://www.chartjs.org/) - Usada para gerar gráficos
+- [Angular in-memory-web-api](https://www.npmjs.com/package/angular-in-memory-web-api) - Usada para simular um servidor backend com os dados a serem consumidos
+
+## ✒️ Autores
+
+Participantes
+
+- **Leonardo Dias** - Desenvolvimento da aplicação - [leonardosdias](https://github.com/leonardosdias)
+
+## 📄 Licença
+
+Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+
+---
+
+⌨️ Template README criado por [Armstrong Lohãns](https://gist.github.com/lohhans).
