@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Entry } from '../shared/entry.model';
 import { EntryService } from '../shared/entry.service';
+
 @Component({
   selector: 'app-entry-list',
   templateUrl: './entry-list.component.html',
@@ -13,10 +13,14 @@ export class EntryListComponent implements OnInit {
   constructor(private entryService: EntryService) {}
 
   ngOnInit(): void {
-    this.entryService.getAll().subscribe(
-      (entries) => (this.entries = entries),
-      (error) => alert('Erro ao carregar a lista')
-    );
+    this.entryService
+      .getAll()
+      .subscribe(
+        (entries) => (
+          (this.entries = entries.sort((a: any, b: any) => b.id - a.id)),
+          (error: any) => alert('Erro ao carregar a lista')
+        )
+      );
   }
 
   deleteEntry(entry: Entry) {

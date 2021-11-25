@@ -38,7 +38,7 @@
                     <input type="text" class="form-control" id="name" formControlName="name">
 
                     <div class="alert alert-danger mt-2"
-                        *ngIf="categoryForm.get('name').invalid && categoryForm.get('name').touched">
+                        *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
@@ -48,7 +48,7 @@
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" id="description" formControlName="description">
                     <div class="alert alert-danger mt-2"
-                        *ngIf="categoryForm.get('description').invalid && categoryForm.get('description').touched">
+                        *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>

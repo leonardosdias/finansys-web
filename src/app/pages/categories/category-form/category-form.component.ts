@@ -1,10 +1,5 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Category } from '../shared/category.model';
@@ -21,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CategoryFormComponent implements OnInit, AfterContentChecked {
   public currentAction: string = '';
-  public categoryForm: any;
+  public categoryForm: FormGroup;
   public pageTitle: string = '';
   public serverErrorMessages: string[] = [];
   public submittingForm: boolean = false;
@@ -49,10 +44,8 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     this.submittingForm = true;
 
     if (this.currentAction === 'new') {
-      console.log(this.categoryForm);
       this.createCategory();
     } else {
-      console.log(this.categoryForm);
       this.updateCategory();
     }
   }
