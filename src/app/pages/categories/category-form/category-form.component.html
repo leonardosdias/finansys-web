@@ -37,7 +37,7 @@
                     <label for="name">Nome</label>
                     <input type="text" class="form-control" id="name" formControlName="name">
 
-                    <div class="alert alert-danger mt-2"
+                    <div class="text-danger mt-2"
                         *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
                         <p>
                             Campo obrigatório.
@@ -47,7 +47,7 @@
                 <div class="form-group col-md-8">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" id="description" formControlName="description">
-                    <div class="alert alert-danger mt-2"
+                    <div class="text-danger mt-2"
                         *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched">
                         <p>
                             Campo obrigatório.
