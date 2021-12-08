@@ -10,14 +10,21 @@ export abstract class BaseResourceService<
 > {
   protected http: HttpClient;
 
-  constructor(protected apiPath: string, protected injector: Injector) {
+  constructor(
+    protected apiPath: string,
+    protected injector: Injector,
+    protected jsonDataToResourceFn: (jsonData: any) => TypeOfClass
+  ) {
     this.http = injector.get(HttpClient);
   }
 
   public getAll(): Observable<TypeOfClass[]> {
     return this.http
       .get(this.apiPath)
-      .pipe(catchError(this.handleError), map(this.jsonDataToResources));
+      .pipe(
+        catchError(this.handleError),
+        map(this.jsonDataToResources.bind(this))
+      );
   }
 
   public getById(id: number): Observable<TypeOfClass> {
@@ -25,21 +32,27 @@ export abstract class BaseResourceService<
 
     return this.http
       .get(url)
-      .pipe(catchError(this.handleError), map(this.jsonDataToResource));
+      .pipe(
+        map(this.jsonDataToResource.bind(this)),
+        catchError(this.handleError)
+      );
   }
 
   public create(resource: TypeOfClass): Observable<TypeOfClass> {
     return this.http
       .post(this.apiPath, resource)
-      .pipe(catchError(this.handleError), map(this.jsonDataToResource));
+      .pipe(
+        map(this.jsonDataToResource.bind(this)),
+        catchError(this.handleError)
+      );
   }
 
   public update(resource: TypeOfClass): Observable<TypeOfClass> {
     const url = `${this.apiPath}/${resource.id}`;
 
     return this.http.put(url, resource).pipe(
-      catchError(this.handleError),
-      map(() => resource)
+      map(() => resource),
+      catchError(this.handleError)
     );
   }
 
@@ -47,19 +60,21 @@ export abstract class BaseResourceService<
     const url = `${this.apiPath}/${id}`;
 
     return this.http.delete(url).pipe(
-      catchError(this.handleError),
-      map(() => null)
+      map(() => null),
+      catchError(this.handleError)
     );
   }
 
   protected jsonDataToResources(jsonData: any[]): TypeOfClass[] {
     const resources: TypeOfClass[] = [];
-    jsonData.forEach((element) => resources.push(element as TypeOfClass));
+    jsonData.forEach((element) =>
+      resources.push(this.jsonDataToResourceFn(element))
+    );
     return resources;
   }
 
   protected jsonDataToResource(jsonData: any): TypeOfClass {
-    return jsonData as TypeOfClass;
+    return this.jsonDataToResourceFn(jsonData);
   }
 
   protected handleError(error: any): Observable<any> {
