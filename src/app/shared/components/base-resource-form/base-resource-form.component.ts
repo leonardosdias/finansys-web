@@ -1,5 +1,5 @@
-import { OnInit, AfterContentChecked, Injector } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OnInit, AfterContentChecked, Injector, Directive, Injectable } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BaseResourceModel } from '../../models/base-resource.model';
@@ -9,17 +9,14 @@ import { switchMap } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 
-export abstract class BaseResourceFormComponent<
-  TypeOfClass extends BaseResourceModel
-> implements OnInit, AfterContentChecked
-{
+@Directive()
+export abstract class BaseResourceFormComponent<TypeOfClass extends BaseResourceModel> implements OnInit, AfterContentChecked {
   public currentAction: string = '';
   public resourceForm: FormGroup;
   public pageTitle: string = '';
   public serverErrorMessages: string[] = [];
   public submittingForm: boolean = false;
 
-  protected toastr: ToastrService;
   protected router: Router;
   protected route: ActivatedRoute;
   protected formBuilder: FormBuilder;
@@ -28,7 +25,8 @@ export abstract class BaseResourceFormComponent<
     protected injector: Injector,
     public resource: TypeOfClass,
     protected resourceService: BaseResourceService<TypeOfClass>,
-    protected jsonDataToResourceFn: (jsonData: any) => TypeOfClass
+    protected jsonDataToResourceFn: (jsonData: any) => TypeOfClass,
+    protected toastr: ToastrService,
   ) {
     this.route = this.injector.get(ActivatedRoute);
     this.router = this.injector.get(Router);
@@ -76,7 +74,7 @@ export abstract class BaseResourceFormComponent<
             this.resource = resource;
             this.resourceForm?.patchValue(resource);
           },
-          (error) => alert('Erro na requisição.')
+          (error) => this.toastr.error('Erro na requisição.')
         );
     }
   }
@@ -120,7 +118,12 @@ export abstract class BaseResourceFormComponent<
   }
 
   protected actionsForSuccess(resource: TypeOfClass) {
-    this.toastr.success('Solicitação processada com sucesso.');
+    if (this.currentAction === 'new') {
+      this.toastr.success('Registro criado com sucesso.');
+    }
+    if (this.currentAction === 'edit') {
+      this.toastr.info('Registro editado com sucesso.');
+    }
 
     const baseComponentPath: string | undefined =
       this.route.snapshot.parent?.url[0].path;

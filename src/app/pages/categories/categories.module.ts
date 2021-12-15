@@ -7,7 +7,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [CategoryListComponent, CategoryFormComponent],
-  imports: [SharedModule, CategoriesRoutingModule, ToastrModule.forRoot()],
+  declarations: [
+    CategoryListComponent,
+    CategoryFormComponent
+  ],
+  imports: [
+    SharedModule,
+    CategoriesRoutingModule,
+    ToastrModule.forRoot()
+  ],
 })
-export class CategoriesModule {}
+export class CategoriesModule { }
