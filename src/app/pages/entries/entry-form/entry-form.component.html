@@ -19,13 +19,14 @@
         </h1>
     </div>
     <div class="col-md-3">
-        <a routerLink="/entries" class="btn btn-light float-right">
+        <a routerLink="/entries" class="btn btn-outline-danger float-right">
+            <i class="pi pi-arrow-left mr-2"></i>
             Voltar
         </a>
     </div>
 </div>
 
-<form [formGroup]="entryForm" (submit)="submitForm()">
+<form [formGroup]="resourceForm" (submit)="submitForm()">
     <div class="card">
         <div class="card-header">
             Informações sobre o lançamento
@@ -41,24 +42,25 @@
                         </option>
                     </select>
 
-                    <div class="text-danger" *ngIf="entryForm.get('type')?.invalid && entryForm.get('type')?.touched">
+                    <div class="text-danger"
+                        *ngIf="resourceForm.get('type')?.invalid && resourceForm.get('type')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
                     </div>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                     <label for="name">Lançamento</label>
                     <input type="text" class="form-control" id="name" formControlName="name">
 
                     <div class="text-danger mt-2"
-                        *ngIf="entryForm.get('name')?.invalid && entryForm.get('name')?.touched">
+                        *ngIf="resourceForm.get('name')?.invalid && resourceForm.get('name')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
                     </div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label for="amount">Valor</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -68,19 +70,19 @@
                             formControlName="amount">
                     </div>
                     <div class="text-danger mt-2"
-                        *ngIf="entryForm.get('amount')?.invalid && entryForm.get('amount')?.touched">
+                        *ngIf="resourceForm.get('amount')?.invalid && resourceForm.get('amount')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
                     </div>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2 column">
                     <label for="date">Data</label>
                     <p-calendar id="date" formControlName="date" inputStyleClass="form-control" dataType="string"
                         dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true">
                     </p-calendar>
                     <div class="text-danger mt-2"
-                        *ngIf="entryForm.get('date')?.invalid && entryForm.get('date')?.touched">
+                        *ngIf="resourceForm.get('date')?.invalid && resourceForm.get('date')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
@@ -89,18 +91,18 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2 column">
                     <label for="paid">Status</label>
                     <div class="btn-group">
-                        <label (click)="entryForm.get('paid')?.setValue(true)"
-                            [class.active]="entryForm.get('paid')?.value=== true"
+                        <label (click)="resourceForm.get('paid')?.setValue(true)"
+                            [class.active]="resourceForm.get('paid')?.value=== true"
                             class="btn btn-outline-info">Pago</label>
-                        <label (click)="entryForm.get('paid')?.setValue(false)"
-                            [class.active]="entryForm.get('paid')?.value=== false"
+                        <label (click)="resourceForm.get('paid')?.setValue(false)"
+                            [class.active]="resourceForm.get('paid')?.value=== false"
                             class="btn btn-outline-danger">Pendente</label>
                     </div>
                     <div class="text-danger mt-2"
-                        *ngIf="entryForm.get('paid')?.invalid && entryForm.get('paid')?.touched">
+                        *ngIf="resourceForm.get('paid')?.invalid && resourceForm.get('paid')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
@@ -114,7 +116,7 @@
                     </select>
 
                     <div class="text-danger"
-                        *ngIf="entryForm.get('categoryId')?.invalid && entryForm.get('categoryId')?.touched">
+                        *ngIf="resourceForm.get('categoryId')?.invalid && resourceForm.get('categoryId')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
@@ -124,7 +126,7 @@
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" id="description" formControlName="description">
                     <div class="text-danger mt-2"
-                        *ngIf="entryForm.get('description')?.invalid && entryForm.get('description')?.touched">
+                        *ngIf="resourceForm.get('description')?.invalid && resourceForm.get('description')?.touched">
                         <p>
                             Campo obrigatório.
                         </p>
@@ -141,8 +143,8 @@
         </ul>
     </div>
 
-    <button [disabled]="submittingForm || entryForm.invalid" type="submit"
-        class="btn btn-primary btn-lg float-right mt-3">
+    <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn  btn-lg float-right mt-3"
+        [ngClass]="{'btn-success': currentAction === 'new', 'btn-primary': currentAction === 'edit' }">
         Salvar
     </button>
 </form>
