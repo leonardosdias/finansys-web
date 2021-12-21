@@ -1,24 +1,16 @@
-<app-bread-crumb 
-[items]="[
+<app-bread-crumb [items]="[
     {
         text: 'Lançamentos',
-        link:'/entries'
+        link: '/entries'
     },
     {
-        text:pageTitle
+        text: pageTitle
     }
-]"
->
+]">
 </app-bread-crumb>
 
-<app-page-header
-    [page-title]="pageTitle"
-    button-text="Voltar"
-    button-link="/entries"
-    button-class="btn-outline-danger"
-    [show-icon]="true"
-    icon-class="pi pi-arrow-left mr-2"
->
+<app-page-header [page-title]="pageTitle" button-text="Voltar" button-link="/entries" button-class="btn-outline-danger"
+    [show-icon]="true" icon-class="pi pi-arrow-left mr-2">
 </app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
@@ -37,23 +29,14 @@
                         </option>
                     </select>
 
-                    <div class="text-danger"
-                        *ngIf="resourceForm.get('type')?.invalid && resourceForm.get('type')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+                    <app-form-field-error [form-control]="resourceForm.get('type')"></app-form-field-error>
+
                 </div>
                 <div class="form-group col-md-6">
                     <label for="name">Lançamento</label>
                     <input type="text" class="form-control" id="name" formControlName="name">
 
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('name')?.invalid && resourceForm.get('name')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+                    <app-form-field-error [form-control]="resourceForm.get('name')"></app-form-field-error>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="amount">Valor</label>
@@ -64,24 +47,17 @@
                         <input [imask]="imaskConfig" type="text" class="form-control text-right" id="amount"
                             formControlName="amount">
                     </div>
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('amount')?.invalid && resourceForm.get('amount')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+
+                    <app-form-field-error [form-control]="resourceForm.get('amount')"></app-form-field-error>
+
                 </div>
                 <div class="form-group col-md-2 column">
                     <label for="date">Data</label>
                     <p-calendar id="date" formControlName="date" inputStyleClass="form-control" dataType="string"
                         dateFormat="dd/mm/yy" [locale]="ptBR" [showButtonBar]="true">
                     </p-calendar>
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('date')?.invalid && resourceForm.get('date')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+
+                    <app-form-field-error [form-control]="resourceForm.get('date')"></app-form-field-error>
                 </div>
             </div>
 
@@ -96,12 +72,8 @@
                             [class.active]="resourceForm.get('paid')?.value=== false"
                             class="btn btn-outline-danger">Pendente</label>
                     </div>
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('paid')?.invalid && resourceForm.get('paid')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+
+                    <app-form-field-error [form-control]="resourceForm.get('paid')"></app-form-field-error>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="categoryId">Categoria</label>
@@ -110,22 +82,15 @@
                         <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
                     </select>
 
-                    <div class="text-danger"
-                        *ngIf="resourceForm.get('categoryId')?.invalid && resourceForm.get('categoryId')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+                    
+                    <app-form-field-error [form-control]="resourceForm.get('categoryId')"></app-form-field-error>
+
                 </div>
                 <div class="form-group col-md-7">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" id="description" formControlName="description">
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('description')?.invalid && resourceForm.get('description')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+
+                    <app-form-field-error [form-control]="resourceForm.get('description')"></app-form-field-error>
                 </div>
             </div>
         </div>

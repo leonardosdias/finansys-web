@@ -1,5 +1,4 @@
-<app-bread-crumb 
-[items]="[
+<app-bread-crumb [items]="[
     {
         text: 'Categorias',
         link:'/categories'
@@ -7,18 +6,11 @@
     {
         text:pageTitle
     }
-]"
->
+]">
 </app-bread-crumb>
 
-<app-page-header
-    [page-title]="pageTitle"
-    button-text="Voltar"
-    button-link="/categories"
-    button-class="btn-outline-danger"
-    [show-icon]="true"
-    icon-class="pi pi-arrow-left mr-2"
->
+<app-page-header [page-title]="pageTitle" button-text="Voltar" button-link="/categories"
+    button-class="btn-outline-danger" [show-icon]="true" icon-class="pi pi-arrow-left mr-2">
 </app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
@@ -33,22 +25,13 @@
                     <label for="name">Nome</label>
                     <input type="text" class="form-control" id="name" formControlName="name">
 
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('name')?.invalid && resourceForm.get('name')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+                    <app-form-field-error [form-control]="resourceForm.get('name')"></app-form-field-error>
                 </div>
                 <div class="form-group col-md-8">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" id="description" formControlName="description">
-                    <div class="text-danger mt-2"
-                        *ngIf="resourceForm.get('description')?.invalid && resourceForm.get('description')?.touched">
-                        <p>
-                            Campo obrigatório.
-                        </p>
-                    </div>
+
+                    <app-form-field-error [form-control]="resourceForm.get('description')"></app-form-field-error>
                 </div>
             </div>
         </div>
