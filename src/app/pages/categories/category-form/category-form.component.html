@@ -11,19 +11,15 @@
 >
 </app-bread-crumb>
 
-<div class="row">
-    <div class="col-md">
-        <h1 class="h2 border-left pl-2">
-            {{pageTitle}}
-        </h1>
-    </div>
-    <div class="col-md">
-        <a routerLink="/categories" class="btn btn-outline-danger float-right">
-            <i class="pi pi-arrow-left mr-2"></i>
-            Voltar
-        </a>
-    </div>
-</div>
+<app-page-header
+    [page-title]="pageTitle"
+    button-text="Voltar"
+    button-link="/categories"
+    button-class="btn-outline-danger"
+    [show-icon]="true"
+    icon-class="pi pi-arrow-left mr-2"
+>
+</app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
     <div class="card">

@@ -1,0 +1,13 @@
+.width-column {
+    width: 80vw;
+}
+
+@media(min-width:1920px) {
+    .width-column {
+        width: 85vw;
+    }
+}
+
+.min-width {
+    width: 85px;
+}
