@@ -6,6 +6,7 @@ import { CategoryService } from '../../categories/shared/category.service';
 import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 import { Entry } from './entry.model';
 import { Category } from '../../categories/shared/category.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,10 @@ import { Category } from '../../categories/shared/category.model';
 export class EntryService extends BaseResourceService<Entry> {
   constructor(
     protected injector: Injector,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    protected toastr: ToastrService,
   ) {
-    super('api/entries', injector, Entry.objectFromJson);
+    super('api/entries', injector, Entry.objectFromJson, toastr);
   }
 
   public create(entry: Entry): Observable<Entry> {

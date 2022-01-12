@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Injector } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 export abstract class BaseResourceService<
   TypeOfClass extends BaseResourceModel
@@ -13,7 +14,8 @@ export abstract class BaseResourceService<
   constructor(
     protected apiPath: string,
     protected injector: Injector,
-    protected jsonDataToResourceFn: (jsonData: any) => TypeOfClass
+    protected jsonDataToResourceFn: (jsonData: any) => TypeOfClass,
+    protected toastr: ToastrService,
   ) {
     this.http = injector.get(HttpClient);
   }
@@ -78,7 +80,7 @@ export abstract class BaseResourceService<
   }
 
   protected handleError(error: any): Observable<any> {
-    console.log('Erro na requisição =>', error);
+    this.toastr.error('Ocorreu um erro na requisição.');
     return throwError(error);
   }
 }

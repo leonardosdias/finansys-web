@@ -1,4 +1,5 @@
 import { Directive, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { BaseResourceService } from '../../services/base-resource.service';
@@ -8,7 +9,8 @@ export class BaseResourceListComponent<TypeOfClass extends BaseResourceModel> im
     public resources: TypeOfClass[] = [];
 
     constructor(
-        private resourceService: BaseResourceService<TypeOfClass>
+        protected resourceService: BaseResourceService<TypeOfClass>,
+        protected toastr: ToastrService,
     ) { }
 
     ngOnInit(): void {
@@ -17,7 +19,9 @@ export class BaseResourceListComponent<TypeOfClass extends BaseResourceModel> im
             .subscribe(
                 (resources: any) => (
                     (this.resources = resources.sort((a: any, b: any) => b.id - a.id)),
-                    (error: any) => alert('Erro ao carregar a lista')
+                    (error: any) => {
+                        this.toastr.error('Erro ao carregar a lista')
+                    }
                 )
             );
     }
@@ -29,7 +33,7 @@ export class BaseResourceListComponent<TypeOfClass extends BaseResourceModel> im
             this.resourceService.delete(Number(resource.id)).subscribe(
                 () =>
                     (this.resources = this.resources.filter((element) => element !== resource)),
-                () => alert('Erro ao tentar excluir esse registro.')
+                () => this.toastr.error('Erro ao tentar excluir esse registro.')
             );
         }
     }

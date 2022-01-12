@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 
@@ -12,8 +13,9 @@ import { CategoryService } from '../shared/category.service';
 export class CategoryListComponent extends BaseResourceListComponent<Category> {
 
   constructor(
-    protected categoryService: CategoryService
+    protected categoryService: CategoryService,
+    protected toastr: ToastrService,
   ) {
-    super(categoryService);
+    super(categoryService, toastr);
   }
 }
