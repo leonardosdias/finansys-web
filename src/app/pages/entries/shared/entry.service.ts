@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
 })
+
 export class EntryService extends BaseResourceService<Entry> {
   constructor(
     protected injector: Injector,
@@ -39,5 +40,19 @@ export class EntryService extends BaseResourceService<Entry> {
       }),
       catchError(this.handleError)
     );
+  }
+
+  public getByMonthAndYear(month: number, year: number): Observable<Entry[]> {
+    return this.getAll().pipe(
+      map(entries => this.filterByMonthAndYear(entries, month, year))
+    );
+  }
+
+  public filterByMonthAndYear(entries: Entry[], month: number, year: number) {
+    const filteredEntries = entries.filter(
+      entry => new Date(String(entry?.date)).getMonth() + 1 == month && new Date(String(entry?.date)).getFullYear() == year
+    );
+
+    return filteredEntries;
   }
 }

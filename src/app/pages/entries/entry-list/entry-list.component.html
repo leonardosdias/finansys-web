@@ -18,7 +18,9 @@
         <tr *ngFor="let entry of resources">
             <td class="width-column">
                 <strong>{{entry.name}}</strong><br>
-                <small class="text-success">{{entry.date}}</small><br>
+                <small [ngClass]="{'text-success': entry.type === 'revenue', 'text-danger': entry.type === 'expense' }">
+                    {{entry.date | date: 'dd/MM/YYYY'}}
+                </small><br>
                 <small *ngIf="entry.description">{{entry.description}}</small>
             </td>
             <td>
