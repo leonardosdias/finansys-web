@@ -20,23 +20,19 @@ export class ReportsComponent implements OnInit {
   public expenseChartData: any;
   public revenueChartData: any;
 
-  chartOptions = {
+  options = {
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true
-          }
-        }
-      ]
+      y: {
+        beginAtZero: true
+      }
     }
   };
 
   categories: Category[] = [];
   entries: Entry[] = [];
 
-  @ViewChild('month') month: ElementRef;
-  @ViewChild('year') year: ElementRef;
+  @ViewChild('month', { static: true }) month: ElementRef;
+  @ViewChild('year', { static: true }) year: ElementRef;
 
   constructor(
     private categoryService: CategoryService,
